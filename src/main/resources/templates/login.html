@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head}"></head>
+<body class="d-flex flex-column min-vh-100">
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">[[#{auth.login.title}]]</h2>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            [[#{auth.login.error}]]
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-info">
+                            [[#{auth.login.logout}]]
+                        </div>
+                        <form th:action="@{/login}" method="post" autocomplete="off">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">[[#{auth.login.email}]]</label>
+                                <input type="email" class="form-control" id="email" name="email" required 
+                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                                       title="Please enter a valid email address">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">[[#{auth.login.password}]]</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
+                                <label class="form-check-label" for="remember-me">[[#{auth.login.remember}]]</label>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">[[#{auth.login.submit}]]</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

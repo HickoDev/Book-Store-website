@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Console Appender -->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Appender -->
+    <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/bookstore.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/bookstore-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Logger Configurations -->
+    <logger name="com.example.bookstore" level="DEBUG" additivity="false">
+        <appender-ref ref="Console" />
+        <appender-ref ref="File" />
+    </logger>
+
+    <logger name="org.springframework.security" level="DEBUG" additivity="false">
+        <appender-ref ref="Console" />
+        <appender-ref ref="File" />
+    </logger>
+
+    <logger name="org.springframework.web" level="DEBUG" additivity="false">
+        <appender-ref ref="Console" />
+        <appender-ref ref="File" />
+    </logger>
+
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+        <appender-ref ref="Console" />
+        <appender-ref ref="File" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="Console" />
+        <appender-ref ref="File" />
+    </root>
+</configuration> 

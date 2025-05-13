@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head}"></head>
+<body class="d-flex flex-column min-vh-100">
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <div class="container my-5">
+        <h2 class="mb-4">[[#{cart.title}]]</h2>
+
+        <div th:if="${#lists.isEmpty(items)}" class="alert alert-info">
+            [[#{cart.empty}]]
+        </div>
+
+        <div th:if="${!#lists.isEmpty(items)}" class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>[[#{books.title}]]</th>
+                                <th>[[#{books.author}]]</th>
+                                <th>[[#{books.price}]]</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="book : ${items}">
+                                <td>[[${book.title}]]</td>
+                                <td>[[${book.author}]]</td>
+                                <td>$[[${book.price}]]</td>
+                                <td>
+                                    <form th:action="@{/cart/{id}/remove(id=${book.id})}" method="post" style="display: inline;">
+                                        <button type="submit" class="btn btn-sm btn-danger">[[#{cart.remove}]]</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" class="text-end"><strong>[[#{cart.total}]]</strong></td>
+                                <td><strong>$[[${total}]]</strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between mt-3">
+                    <form th:action="@{/cart/clear}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-warning">[[#{cart.clear}]]</button>
+                    </form>
+                    <div>
+                        <a href="/books" class="btn btn-secondary me-2">[[#{cart.continue}]]</a>
+                        <form th:action="@{/order/create}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-success">[[#{cart.checkout}]]</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html> 

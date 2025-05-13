@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head}"></head>
+<body class="d-flex flex-column min-vh-100">
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <div class="container my-5">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0" th:text="#{order.title}">Order Confirmation</h2>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-success" th:text="#{order.success}">
+                    Your order has been placed successfully
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p>
+                            <strong th:text="#{order.number} + ': '">Order Number: </strong>
+                            <span th:text="${order.id}">#123</span>
+                        </p>
+                        <p>
+                            <strong th:text="#{order.date} + ': '">Order Date: </strong>
+                            <span th:text="${#temporals.format(order.dateCreated, 'dd-MM-yyyy HH:mm')}">01-01-2024 12:00</span>
+                        </p>
+                    </div>
+                </div>
+
+                <h4 th:text="#{order.items}">Items</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="book : ${order.books}">
+                                <td th:text="${book.title}">Book Title</td>
+                                <td th:text="${book.author}">Author Name</td>
+                                <td th:text="${'$' + book.price}">$9.99</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" class="text-end">
+                                    <strong th:text="#{order.total}">Total Amount:</strong>
+                                </td>
+                                <td th:text="${'$' + order.totalPrice}">$29.97</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="/books" class="btn btn-primary" th:text="#{order.backToBooks}">Back to Books</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html> 

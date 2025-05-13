@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head}"></head>
+<body class="d-flex flex-column min-vh-100">
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">[[#{auth.signup.title}]]</h2>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/signup}" method="post" th:object="${user}">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">[[#{auth.signup.name}]]</label>
+                                <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">[[#{auth.signup.email}]]</label>
+                                <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">[[#{auth.signup.password}]]</label>
+                                <input type="password" class="form-control" id="password" th:field="*{password}" required>
+                                <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">[[#{auth.signup.submit}]]</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html> 
