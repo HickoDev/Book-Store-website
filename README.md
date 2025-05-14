@@ -31,7 +31,7 @@ A multilingual Spring Boot bookstore application with user authentication, shopp
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/bookstore.git
+   git clone : https://github.com/HickoDev/Book-Store-website
    cd bookstore
    ```
 
