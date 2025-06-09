@@ -54,15 +54,7 @@ A multilingual Spring Boot bookstore application with user authentication, shopp
 
 ## Default Users
 
-The application comes with two pre-configured users:
-
-1. Admin User:
-   - Email: admin@example.com
-   - Password: password
-
-2. Regular User:
-   - Email: john@example.com
-   - Password: password
+Just do a sign up and test the user that you created 
 
 ## Internationalization
 
